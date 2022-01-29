@@ -1,0 +1,16 @@
+a {
+  color: blue;
+}
+a:visited {
+  color: blue;
+}
+#app nav {
+  display: flex;
+  justify-content: center;
+}
+#app nav a {
+  margin-left: 8px;
+}
+#app h1 {
+  text-align: center;
+}
