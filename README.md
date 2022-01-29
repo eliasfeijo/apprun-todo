@@ -17,6 +17,6 @@ You can view the application running [here](https://eliasfeijo.github.io/apprun-
 Author: **Elias Feijó**
 
 Technologies:
-* [AppRun](https://github.com/yysun/apprun).
+* [AppRun](https://github.com/yysun/apprun)
 * [Webpack](https://webpack.js.org/)
 * [Typescript](https://www.typescriptlang.org/)

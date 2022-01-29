@@ -48,11 +48,18 @@ export default class Home extends Component {
       <ul>
         {this.listView(listTodos)}
       </ul>
+      {
+        listTodos.length > 0 && 
+        <p id="clear-todos" onclick={e => this.run('clearTodos')}>Reset Todos</p>
+      }
     </div>
   );
   }
   
   update = {
+    'clearTodos': (state) => {
+      return {todo: state.todo, listTodos: []}
+    },
     'loadTodos': async (state) => {
       const url = 'https://jsonplaceholder.typicode.com/todos?_limit=5';
       try {
