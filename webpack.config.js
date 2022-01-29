@@ -7,7 +7,6 @@ module.exports = (env, argv) => {
     output: {
       filename: '[name].js',
       path: path.resolve(__dirname),
-      publicPath: argv.mode === 'production' ? '/apprun-todo/' : '/',
     },
     resolve: {
       extensions: ['.ts', '.tsx', '.js']
