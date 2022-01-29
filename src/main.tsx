@@ -1,92 +1,35 @@
 import app from 'apprun';
+import About from './components/About';
+import Home from './components/Home';
+
+const HOME_TITLE = "Todo Application";
+const ABOUT_TITLE = "About";
 
 const state = {
-  todo: '',
-  listTodos: [],
-};
-
-const listView = listTodos => {
-  return listTodos.map((todo, i) => {
-    return (
-      <li class="todo">
-        <input
-          type="checkbox"
-          checked={todo.checked}
-          onchange={e => app.run('checkTodo', e.target.checked, i)}
-        />
-        <span
-          id={`todo-${i}`}
-          class="todo-text"
-          style={`text-decoration: ${todo.checked ? 'line-through;': 'none;'}`}
-        >
-          {todo.text}
-        </span>
-        <span class="todo-x" onclick={e => app.run('deleteTodo', i)}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </span>
-      </li>
-    )
-  });
+  pageTitle: HOME_TITLE,
+  page: <Home />
 }
 
-const view = ({todo, listTodos}) => {
+const view = (state) => {
 return (
-  <div id="home">
-    <h1>Todo Application</h1>
-    <input
-      type="text"
-      id="input-todo"
-      $bind="todo"
-      onkeypress={e => app.run('keyPress', e)}
-    />
-    <ul>
-      {listView(listTodos)}
-    </ul>
+  <div id="app">
+    <nav>
+      <a href="/" id="link-home">Home</a>
+      <a href="#about" id="link-about">About</a>
+    </nav>
+    <h1>{state.pageTitle}</h1>
+    {state.page}
   </div>
 );
 }
 
 const update = {
-  'loadTodos': async (state) => {
-    const url = 'https://jsonplaceholder.typicode.com/todos?_limit=5';
-    try {
-      const response = await fetch(url);
-      const json = await response.json();
-      const listTodos = json.map((todo) => {
-        return {
-          checked: todo.completed,
-          text: todo.title
-        };
-      });
-      return {todo: state.todo, listTodos};
-    }
-    catch(e) {
-      console.log('Error loading Todos', e);
-    }
-    return state;
+  "/": (state) => {
+    return { pageTitle: HOME_TITLE, page: <Home /> }
   },
-  'keyPress': (state, e) => {
-    if(e.code === 'Enter' && state.todo.trim() !== '') {
-      return {
-        todo: '',
-        listTodos: [...state.listTodos, {checked: false, text: state.todo.trim()}]
-      }
-    }
-    return state;
-  },
-  'checkTodo': (state, checked, i) => {
-    state.listTodos[i].checked = checked;
-    return state;
-  },
-  'deleteTodo': (state, i) => {
-    const listTodos = state.listTodos.filter((todo, index) => {
-      return index !== i;
-    });
-    return {todo: state.todo, listTodos}
+  "#about": (state) => {
+    return { pageTitle: ABOUT_TITLE, page: <About /> }
   }
 };
 
 app.start(document.body, state, view, update);
-app.run('loadTodos')
