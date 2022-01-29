@@ -8,7 +8,7 @@ const state = {
 const listView = listTodos => {
   return listTodos.map((todo, i) => {
     return (
-      <li style="display: flex; align-items: center;">
+      <li class="todo">
         <input
           type="checkbox"
           checked={todo.checked}
@@ -16,12 +16,13 @@ const listView = listTodos => {
         />
         <span
           id={`todo-${i}`}
-          style={"margin-left: 8px; margin-right: 8px;" + ` text-decoration: ${todo.checked ? 'line-through;': 'none;'}`}
+          class="todo-text"
+          style={`text-decoration: ${todo.checked ? 'line-through;': 'none;'}`}
         >
           {todo.text}
         </span>
-        <span style="color: red; position: relative; top: 2px; cursor: pointer;" onclick={e => app.run('deleteTodo', i)}>
-          <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <span class="todo-x" onclick={e => app.run('deleteTodo', i)}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </span>
@@ -32,10 +33,15 @@ const listView = listTodos => {
 
 const view = ({todo, listTodos}) => {
 return (
-  <div>
+  <div id="home">
     <h1>Todo Application</h1>
-    <input type="text" $bind="todo" onkeypress={e => app.run('keyPress', e)} />
-    <ul style="list-style-type: none; padding: 8px;">
+    <input
+      type="text"
+      id="input-todo"
+      $bind="todo"
+      onkeypress={e => app.run('keyPress', e)}
+    />
+    <ul>
       {listView(listTodos)}
     </ul>
   </div>
