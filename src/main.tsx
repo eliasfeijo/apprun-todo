@@ -1,6 +1,7 @@
 import app from 'apprun';
 import About from './components/About';
 import Home from './components/Home';
+import './styles/main.css';
 
 const HOME_TITLE = "Todo Application";
 const ABOUT_TITLE = "About";

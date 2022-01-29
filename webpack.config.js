@@ -9,12 +9,16 @@ module.exports = (env, argv) => {
       path: path.resolve(__dirname),
     },
     resolve: {
-      extensions: ['.ts', '.tsx', '.js']
+      extensions: ['.ts', '.tsx', '.js', '.css']
     },
     module: {
       rules: [
         { test: /\.tsx?$/, loader: 'ts-loader' },
-        { test: /\.js$/, use: ["source-map-loader"], enforce: "pre" }
+        { test: /\.js$/, use: ["source-map-loader"], enforce: "pre" },
+        {
+          test: /\.css$/i,
+          use: ["style-loader", "css-loader"],
+        },
       ]
     },
     devServer: {
