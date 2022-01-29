@@ -43,6 +43,24 @@ return (
 }
 
 const update = {
+  'loadTodos': async (state) => {
+    const url = 'https://jsonplaceholder.typicode.com/todos?_limit=5';
+    try {
+      const response = await fetch(url);
+      const json = await response.json();
+      const listTodos = json.map((todo) => {
+        return {
+          checked: todo.completed,
+          text: todo.title
+        };
+      });
+      return {todo: state.todo, listTodos};
+    }
+    catch(e) {
+      console.log('Error loading Todos', e);
+    }
+    return state;
+  },
   'keyPress': (state, e) => {
     if(e.code === 'Enter' && state.todo.trim() !== '') {
       return {
@@ -65,3 +83,4 @@ const update = {
 };
 
 app.start(document.body, state, view, update);
+app.run('loadTodos')
