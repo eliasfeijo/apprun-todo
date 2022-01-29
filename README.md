@@ -1,7 +1,22 @@
-##
+# Todo Application
 
-* Use _npm start_ to start the dev server
-* Use _npm test_ to run unit tests
-* Use _npm run build_ to build for production
+You can view the application running [here](https://eliasfeijo.github.io/apprun-todo/).
 
-This is an application built with [AppRun](https://github.com/yysun/apprun).
+## Dependencies
+
+* [Node.js](https://nodejs.org/)
+
+## Instructions
+
+* Run `npm install` to install the dependencies.
+* Use `npm start` to start the dev server
+* Use `npm run build` to build for production
+
+## Credits
+
+Author: **Elias Feijó**
+
+Technologies:
+* [AppRun](https://github.com/yysun/apprun).
+* [Webpack](https://webpack.js.org/)
+* [Typescript](https://www.typescriptlang.org/)
